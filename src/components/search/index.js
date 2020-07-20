@@ -1,9 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Form, Input, Select, Radio, Button } from "antd";
 import "./index.css";
-import { connect } from "react-redux";
-// import { connect } from "react-redux";
-// import { fetchProducts, fetchProductsSuccess } from "../../redux/action";
 
 const { Option } = Select;
 

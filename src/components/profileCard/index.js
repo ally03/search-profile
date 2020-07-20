@@ -1,38 +1,31 @@
 import React, { useEffect, useState } from "react";
-import { Layout, Card, Col, Row, List } from "antd";
+import { Card, List } from "antd";
+import { connect } from "react-redux";
+import { updateState, fetchUserData } from "../../redux/action";
 import "./index.css";
-import { UserData } from "../utils/api";
+// import { UserData } from "../utils/api";
 const { Meta } = Card;
 
-function ProfileCard() {
-  const [error, setError] = useState(null);
+function ProfileCard(props) {
   const [isLoaded, setIsLoaded] = useState(false);
-  const [items, setItems] = useState([]);
   useEffect(() => {
-    fetch(UserData)
-      .then((res) => res.json())
-      .then(
-        (data) => {
-          setIsLoaded(true);
-          setItems(data.results);
-        },
-        (error) => {
-          setIsLoaded(true);
-          setError(error);
-        }
-      );
+    setIsLoaded(true);
+    props.fetchUserData();
   }, []);
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  } else if (!isLoaded) {
+
+  console.log("object", props);
+
+  if (!isLoaded) {
     return <div>Loading...</div>;
   } else {
     return (
       <div className="profile-container">
-        <h1> {items.length} Result</h1>
+        <h1>{props.error}</h1>
+        <h1> {props.userData.length} Result</h1>
         <List
+          rowKey="uid"
           grid={{ xs: 1, md: 1, xl: 2 }}
-          dataSource={items}
+          dataSource={props.userData}
           pagination={{
             size: "small",
             onChange: (page) => {
@@ -42,9 +35,9 @@ function ProfileCard() {
             className: "pagination",
             pageSize: 20,
           }}
-          renderItem={(item, index) => {
+          renderItem={(item, key) => {
             return (
-              <List.Item key={String(Math.random().toString())}>
+              <List.Item>
                 <Card
                   className="profile-image"
                   bordered={false}
@@ -75,5 +68,19 @@ function ProfileCard() {
     );
   }
 }
+const MapStateToProps = (state) => {
+  return {
+    products: state.productReducer.products,
+    userData: state.productReducer.userData,
+    error: state.productReducer.error,
+  };
+};
 
-export default ProfileCard;
+const MapDispatchToProps = (dispatch) => {
+  return {
+    updateState: () => dispatch(updateState()),
+    fetchUserData: () => dispatch(fetchUserData()),
+  };
+};
+
+export default connect(MapStateToProps, MapDispatchToProps)(ProfileCard);
