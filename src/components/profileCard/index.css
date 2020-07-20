@@ -1,0 +1,12 @@
+.profile-container {
+  margin: 20px;
+}
+
+.profile-image {
+  width: 400px;
+  border-bottom: solid grey;
+}
+
+.pagination {
+  display: flex;
+}
