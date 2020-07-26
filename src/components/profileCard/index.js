@@ -12,12 +12,10 @@ function ProfileCard(props) {
   }, [fetchUserData]);
   return (
     <div className="profile-container">
-      {/* <h1>{props.error}</h1>  */}
       <h1> {props.userData.length} Result</h1>
       <List
         rowKey="uid"
         grid={{ gutter: 16, xs: 1, sm: 1, md: 1, lg: 1, xl: 2, xxl: 2 }}
-        // grid={{ xs: 1, md: 1, xl: 2 }}
         dataSource={props.userData}
         pagination={{
           size: "small",

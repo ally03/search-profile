@@ -16,16 +16,3 @@ if (process.env.NODE_ENV === "development") {
 const composedEnhancers = compose(applyMiddleware(thunk), ...enhancers);
 
 export default createStore(rootReducer, initialState, composedEnhancers);
-// import { applyMiddleware, createStore } from "redux";
-// import thunk from "redux-thunk";
-
-// import rootReducer from "./reducer/";
-// const initialState = {};
-
-// const middlewares = [thunk];
-
-// export default createStore(
-//   rootReducer,
-//   initialState,
-//   applyMiddleware(...middlewares)
-// );

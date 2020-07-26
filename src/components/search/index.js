@@ -29,7 +29,6 @@ function Search(props) {
 
           <Select
             style={{ width: 150 }}
-            // suffixIcon={<CaretDownOutlined className="search-icon" />}
             placeholder={"choose age"}
             onChange={(value) =>
               props.searchAgeValue({
