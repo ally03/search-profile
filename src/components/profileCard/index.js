@@ -1,20 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Card, List } from "antd";
 import { connect } from "react-redux";
 import { fetchUserData } from "../../redux/action";
 import "./index.css";
-// import { UserData } from "../utils/api";
 const { Meta } = Card;
-const personData = require("../../redux/action/apis.json");
-// console.log("personData", personData);
 
 function ProfileCard(props) {
-  console.log("props", props);
-
+  const { fetchUserData } = props;
   useEffect(() => {
     console.log("executing useeffect");
-    props.fetchUserData();
-  }, []);
+    fetchUserData();
+  }, [fetchUserData]);
   return (
     <div className="profile-container">
       {/* <h1>{props.error}</h1>
@@ -22,7 +18,6 @@ function ProfileCard(props) {
       <List
         rowKey="uid"
         grid={{ xs: 1, md: 1, xl: 2 }}
-        // dataSource={props.userData}
         dataSource={props.userData}
         pagination={{
           size: "small",
@@ -33,7 +28,7 @@ function ProfileCard(props) {
           className: "pagination",
           pageSize: 20,
         }}
-        renderItem={(item, key) => {
+        renderItem={(item) => {
           return (
             <List.Item>
               <Card
@@ -65,7 +60,7 @@ function ProfileCard(props) {
     </div>
   );
 }
-//}
+
 const MapStateToProps = (state) => {
   return {
     userData: state.productReducer.userData,

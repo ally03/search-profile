@@ -46,9 +46,7 @@ const productReducer = (state = initialState, action) => {
         }),
       };
     case SET_FILTERS:
-      console.log("action.payload from set filters", action.payload);
       const { name, age, gender } = action.payload;
-      console.log("from set filters", name, age, gender);
       return {
         ...state,
         name,

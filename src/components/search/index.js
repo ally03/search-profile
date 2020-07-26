@@ -3,11 +3,11 @@ import { Form, Input, Select, Radio } from "antd";
 import { connect } from "react-redux";
 import {
   filterUsers,
-  searchNameValue,
-  searchAgeValue,
-  searchGenderValue,
-  SET_DATA,
-  getUsers,
+  // searchNameValue,
+  // searchAgeValue,
+  // searchGenderValue,
+  // SET_DATA,
+  // getUsers,
 } from "../../redux/action";
 import "./index.css";
 
@@ -51,7 +51,6 @@ function Search(props) {
         </Form.Item>
         <Radio.Group
           onChange={(event) => {
-            console.log("props", props);
             props.searchGenderValue({
               name: props.name,
               age: props.age,
@@ -83,16 +82,12 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     searchNameValue: (criteria) => {
-      console.log("searchNameValue criteria", criteria);
-      // dispatch(searchNameValue(value));
       dispatch(filterUsers(criteria));
     },
     searchAgeValue: (criteria) => {
-      console.log("searchAgeValue criteria", criteria);
       dispatch(filterUsers(criteria));
     },
     searchGenderValue: (criteria) => {
-      console.log("searchGenderValue criteria", criteria);
       dispatch(filterUsers(criteria));
     },
   };
