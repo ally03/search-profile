@@ -1,20 +1,21 @@
 import {
-  FETCH_DATA,
+  SET_DATA,
   FETCH_ERROR,
   NAME_SEARCH,
   AGE_SEARCH,
   GENDER_SEARCH,
+  SET_FILTERS,
 } from "../action";
 const initialState = {
   userData: [],
   error: "",
-  nameSearch: undefined,
-  ageSearch: 0,
-  genderSearch: undefined,
+  name: undefined,
+  age: undefined,
+  gender: undefined,
 };
 const productReducer = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_DATA:
+    case SET_DATA:
       return {
         ...state,
         userData: action.payload,
@@ -38,11 +39,21 @@ const productReducer = (state = initialState, action) => {
       return {
         ...state,
         nameSearch: action.payload,
-        // nameSearch: state.userData.filter(
-        //   (person) =>
-        //     person.name.first.toLowerCase().includes(action.payload) ||
-        //     person.name.last.toLowerCase().includes(action.payload)
-        // ),
+        userData: state.userData.filter((user) => {
+          return user.name.first
+            .toLowerCase()
+            .includes(action.payload.toLowerCase());
+        }),
+      };
+    case SET_FILTERS:
+      console.log("action.payload from set filters", action.payload);
+      const { name, age, gender } = action.payload;
+      console.log("from set filters", name, age, gender);
+      return {
+        ...state,
+        name,
+        age,
+        gender,
       };
     default:
       return state;

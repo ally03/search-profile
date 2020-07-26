@@ -6,71 +6,15 @@ import "./index.css";
 // import { UserData } from "../utils/api";
 const { Meta } = Card;
 const personData = require("../../redux/action/apis.json");
-console.log("personData", personData);
+// console.log("personData", personData);
 
 function ProfileCard(props) {
-  // const [isLoaded, setIsLoaded] = useState(false);
+  console.log("props", props);
 
-  // const { fetchUserData } = props;
-  // useEffect(() => {
-  //   setIsLoaded(true);
-  //   fetchUserData();
-  // }, [fetchUserData]);
-
-  // console.log("object", props.nameSearch, props.nameSearch.length);
-  //console.log("search value", props);
-  // var alid = props.userData.filter((person) =>
-  // if (person.name.)
-  // person.name.first.toLowerCase().includes(props.nameSearch)
-  // );
-
-  const data = personData.results.filter((user) => {
-    const firstName = user.name.first.toLowerCase();
-    const lastName = user.name.last.toLowerCase();
-
-    if (
-      (firstName.includes(props.nameSearch) ||
-        lastName.includes(props.nameSearch)) &&
-      user.dob.age >= props.ageSearch[0] &&
-      user.dob.age <= props.ageSearch[1] &&
-      user.gender === props.genderSearch
-    ) {
-      return true;
-    } else if (
-      (firstName.includes(props.nameSearch) ||
-        lastName.includes(props.nameSearch)) &&
-      user.dob.age >= props.ageSearch[0] &&
-      user.dob.age <= props.ageSearch[1]
-    ) {
-      return true;
-    } else if (
-      user.dob.age >= props.ageSearch[0] &&
-      user.dob.age <= props.ageSearch[1] &&
-      user.gender === props.genderSearch
-    ) {
-      return true;
-    } else if (
-      (firstName.includes(props.nameSearch) ||
-        lastName.includes(props.nameSearch)) &&
-      user.gender === props.genderSearch
-    ) {
-      return true;
-    } else {
-      return false;
-    }
-    // return (
-    //   firstName.includes(props.nameSearch) ||
-    //   lastName.includes(props.nameSearch) ||
-    //   (user.dob.age >= props.ageSearch[0] &&
-    //     user.dob.age <= props.ageSearch[1]) ||
-    //   user.gender === props.genderSearch
-    // );
-  });
-
-  console.log("api filter data", data);
-  // if (!isLoaded) {
-  //   return <div>Loading...</div>;
-  // } else {
+  useEffect(() => {
+    console.log("executing useeffect");
+    props.fetchUserData();
+  }, []);
   return (
     <div className="profile-container">
       {/* <h1>{props.error}</h1>
@@ -79,7 +23,7 @@ function ProfileCard(props) {
         rowKey="uid"
         grid={{ xs: 1, md: 1, xl: 2 }}
         // dataSource={props.userData}
-        dataSource={personData.results}
+        dataSource={props.userData}
         pagination={{
           size: "small",
           onChange: (page) => {
@@ -126,9 +70,9 @@ const MapStateToProps = (state) => {
   return {
     userData: state.productReducer.userData,
     error: state.productReducer.error,
-    nameSearch: state.productReducer.nameSearch,
-    ageSearch: state.productReducer.ageSearch,
-    genderSearch: state.productReducer.genderSearch,
+    name: state.productReducer.name,
+    age: state.productReducer.age,
+    gender: state.productReducer.gender,
   };
 };
 
