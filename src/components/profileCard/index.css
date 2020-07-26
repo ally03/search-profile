@@ -1,5 +1,7 @@
 .profile-container {
-  margin: 20px;
+  flex: 3 0 0;
+  margin: 10px;
+  padding-top: 10px;
 }
 
 .profile-image {
@@ -9,4 +11,17 @@
 
 .pagination {
   display: flex;
+}
+
+/* .list-profile {
+  display: flex;
+  flex-direction: row;
+} */
+
+.detail-text {
+  color: #1d7eaa;
+}
+
+.person-text {
+  color: #211c1d;
 }

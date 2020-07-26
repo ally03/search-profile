@@ -6,19 +6,15 @@ import Search from "./search";
 import "./App.css";
 import { Layout } from "antd";
 import ProfileCard from "./profileCard";
-const { Sider, Content } = Layout;
+// const { Sider, Content } = Layout;
 
 function App() {
   return (
     <Layout>
       <PageHeader />
-      <Layout className="alid">
-        <Sider width={400} className="site-layout-background">
-          <Search />
-        </Sider>
-        <Content className="site-layout-background">
-          <ProfileCard />
-        </Content>
+      <Layout className="site-layout-background">
+        <Search />
+        <ProfileCard />
       </Layout>
     </Layout>
   );

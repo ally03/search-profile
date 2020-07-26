@@ -1,14 +1,7 @@
 import React from "react";
-import { Form, Input, Select, Radio } from "antd";
+import { Input, Select, Radio } from "antd";
 import { connect } from "react-redux";
-import {
-  filterUsers,
-  // searchNameValue,
-  // searchAgeValue,
-  // searchGenderValue,
-  // SET_DATA,
-  // getUsers,
-} from "../../redux/action";
+import { filterUsers } from "../../redux/action";
 import "./index.css";
 
 const { Option } = Select;
@@ -16,9 +9,10 @@ const { Option } = Select;
 function Search(props) {
   return (
     <div className="container">
-      <h1>Refine</h1>
-      <Form name="search-person">
-        <Form.Item name="name" label="Name">
+      <h2>Refine</h2>
+      <div name="search-person">
+        <div className="search-field">
+          <h3>Name</h3>
           <Input
             onChange={(event) =>
               props.searchNameValue({
@@ -28,44 +22,51 @@ function Search(props) {
               })
             }
           />
-        </Form.Item>
-        <Form.Item name="name" label="Age">
-          <Input.Group compact>
-            <Select
-              placeholder={"choose age"}
-              onChange={(value) =>
-                props.searchAgeValue({
-                  name: props.name,
-                  age: value,
-                  gender: props.gender,
-                })
-              }
-            >
-              <Option value={[0, 10]}>0 - 10</Option>
-              <Option value={[10, 20]}>10 - 20</Option>
-              <Option value={[20, 30]}>20 - 30</Option>
-              <Option value={[30, 40]}>30 - 40</Option>
-              <Option value={[40, 50]}>40 -50</Option>
-            </Select>
-          </Input.Group>
-        </Form.Item>
-        <Radio.Group
-          onChange={(event) => {
-            props.searchGenderValue({
-              name: props.name,
-              age: props.age,
-              gender: event.target.value,
-            });
-          }}
-        >
-          <Radio className="radioStyle" value="male">
-            Male
-          </Radio>
-          <Radio className="radioStyle" value="female">
-            Female
-          </Radio>
-        </Radio.Group>
-      </Form>
+        </div>
+
+        <div className="search-field">
+          <h3>Age</h3>
+
+          <Select
+            style={{ width: 150 }}
+            // suffixIcon={<CaretDownOutlined className="search-icon" />}
+            placeholder={"choose age"}
+            onChange={(value) =>
+              props.searchAgeValue({
+                name: props.name,
+                age: value,
+                gender: props.gender,
+              })
+            }
+          >
+            <Option value={[0, 10]}>0 - 10</Option>
+            <Option value={[10, 20]}>10 - 20</Option>
+            <Option value={[20, 30]}>20 - 30</Option>
+            <Option value={[30, 40]}>30 - 40</Option>
+            <Option value={[40, 50]}>40 -50</Option>
+          </Select>
+        </div>
+
+        <div className="search-field">
+          <h3>Gender</h3>
+          <Radio.Group
+            onChange={(event) => {
+              props.searchGenderValue({
+                name: props.name,
+                age: props.age,
+                gender: event.target.value,
+              });
+            }}
+          >
+            <Radio className="radioStyle" value="male">
+              Male
+            </Radio>
+            <Radio className="radioStyle" value="female">
+              Female
+            </Radio>
+          </Radio.Group>
+        </div>
+      </div>
     </div>
   );
 }

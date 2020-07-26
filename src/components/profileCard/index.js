@@ -8,22 +8,19 @@ const { Meta } = Card;
 function ProfileCard(props) {
   const { fetchUserData } = props;
   useEffect(() => {
-    console.log("executing useeffect");
     fetchUserData();
   }, [fetchUserData]);
   return (
     <div className="profile-container">
-      {/* <h1>{props.error}</h1>
-        <h1> {props.userData.length} Result</h1> */}
+      {/* <h1>{props.error}</h1>  */}
+      <h1> {props.userData.length} Result</h1>
       <List
         rowKey="uid"
-        grid={{ xs: 1, md: 1, xl: 2 }}
+        grid={{ gutter: 16, xs: 1, sm: 1, md: 1, lg: 1, xl: 2, xxl: 2 }}
+        // grid={{ xs: 1, md: 1, xl: 2 }}
         dataSource={props.userData}
         pagination={{
           size: "small",
-          onChange: (page) => {
-            console.log(page);
-          },
           showSizeChanger: false,
           className: "pagination",
           pageSize: 20,
@@ -45,10 +42,17 @@ function ProfileCard(props) {
                 <Meta
                   title={[item.name.first, " ", item.name.last]}
                   description={[
-                    <div>
-                      <p>Age: {item.dob.age}</p>
-                      <p>Gender: {item.gender}</p>
-                      <p> Email: {item.email}</p>
+                    <div className="detail-text">
+                      <p>
+                        Age: <span className="person-text">{item.dob.age}</span>{" "}
+                      </p>
+                      <p>
+                        Gender:
+                        <span className="person-text">{item.gender}</span>
+                      </p>
+                      <p>
+                        Email: <span className="person-text">{item.email}</span>
+                      </p>
                     </div>,
                   ]}
                 />

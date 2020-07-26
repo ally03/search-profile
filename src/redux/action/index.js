@@ -7,9 +7,7 @@ export const SET_FILTERS = "SET_FILTERS";
 
 export const fetchUserData = () => async (dispatch) => {
   try {
-    const request = await fetch(
-      "https://run.mocky.io/v3/70807a6d-9c17-4775-b05d-d1356eab733b"
-    );
+    const request = await fetch("https://randomuser.me/api/?results=200");
     const response = await request.json();
     dispatch({
       type: SET_DATA,
@@ -54,9 +52,7 @@ export const filterUsers = (criteria) => async (dispatch) => {
 
 export const getUsers = async () => {
   try {
-    const request = await fetch(
-      "https://run.mocky.io/v3/70807a6d-9c17-4775-b05d-d1356eab733b"
-    );
+    const request = await fetch("https://randomuser.me/api/?results=200");
     const response = await request.json();
     return response;
   } catch (error) {
